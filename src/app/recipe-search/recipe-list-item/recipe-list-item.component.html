@@ -1,1 +1,11 @@
-<p>recipe-list-item works!</p>
+<div class="container recipe-item-container" (click)="onClick.emit(recipe)">
+  <div class="row">
+    <div class="col-1 recipe-icon-container">
+      <img src="{{getRecipeIconUrl()}}" alt="icon of the item" class="recipe-icon">
+    </div>
+    <div class="col-10">
+      <div class="recipe-name">{{recipe.Name}}</div>
+      <div class="recipe-description">{{recipe.ItemResult.Description}}</div>
+    </div>
+  </div>
+</div>

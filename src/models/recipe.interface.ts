@@ -29,6 +29,7 @@ export interface Recipe {
   ItemIngredient7 : Item;
   ItemIngredient8 : Item;
   ItemIngredient9 : Item;
+  ItemResult : Item;
   Name : string;
   Url : string;
 }

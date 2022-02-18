@@ -1,0 +1,26 @@
+@import "src/styles";
+
+.recipe-icon-container {
+  height: 50px;
+}
+.recipe-name {
+  color: $default-brown;
+  font-weight: bold;
+}
+.recipe-item-container {
+  padding-top: 8px;
+  border-radius: 10px;
+  position: relative;
+  &:hover {
+    background-color: $default-light-red;
+    cursor: pointer;
+  }
+  &:after {
+    content: "";
+    width: 90%;
+    height: 1px;
+    background: $default-light-red;
+    position: absolute;
+    left: 5%;
+  }
+}

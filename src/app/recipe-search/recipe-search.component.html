@@ -10,7 +10,7 @@
   </div>
   <div class="row">
     <div class="recipes-container" *ngFor="let recipe of recipes">
-      <app-recipe-list-item [recipe]="recipe"></app-recipe-list-item>
+      <app-recipe-list-item [recipe]="recipe" (onClick)="onRecipeSelect($event)"></app-recipe-list-item>
     </div>
   </div>
 </div>
