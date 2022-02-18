@@ -1,0 +1,16 @@
+
+<div class="container search-container">
+  <div class="row">
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" placeholder="Recipe Name" aria-label="Recipe Name" aria-describedby="basic-addon2" (keyup)="setSearch($event)">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary search-button" type="button" (click)="search()">Search</button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="recipes-container" *ngFor="let recipe of recipes">
+      <app-recipe-list-item [recipe]="recipe"></app-recipe-list-item>
+    </div>
+  </div>
+</div>

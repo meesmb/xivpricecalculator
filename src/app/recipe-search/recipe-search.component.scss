@@ -1,0 +1,9 @@
+@import "src/styles";
+
+.search-container {
+  padding-top: 20px;
+  width: 50%;
+}
+.search-button:hover {
+  background-color: $default-black;
+}

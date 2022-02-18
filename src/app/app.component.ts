@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {UniversalisService} from "../services/universalis.service";
+import {XIVApiService} from "../services/xivapi.service";
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'xivpricecalculator';
+
+  constructor() {
+  }
+
+
 }
