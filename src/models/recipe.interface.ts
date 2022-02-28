@@ -1,4 +1,4 @@
-import {Item} from "./item.model";
+import {Item} from "./item.interface";
 
 export interface Recipe {
   AmountIngredient0 : number;
@@ -32,4 +32,15 @@ export interface Recipe {
   ItemResult : Item;
   Name : string;
   Url : string;
+  ItemIngredientRecipe0 : Recipe[]
+  ItemIngredientRecipe1 : Recipe[]
+  ItemIngredientRecipe2 : Recipe[]
+  ItemIngredientRecipe3 : Recipe[]
+  ItemIngredientRecipe4 : Recipe[]
+  ItemIngredientRecipe5 : Recipe[]
+  ItemIngredientRecipe6 : Recipe[]
+  ItemIngredientRecipe7 : Recipe[]
+  ItemIngredientRecipe8 : Recipe[]
+  ItemIngredientRecipe9 : Recipe[]
+
 }

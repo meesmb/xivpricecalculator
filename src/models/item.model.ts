@@ -1,14 +1,6 @@
+import {Item} from "./item.interface";
 
-export class Item {
-  Icon : string;
-  Name : string;
-  Description: string;
-  ID : number;
-
-  constructor() {
-    this.Icon = "";
-    this.Name = "";
-    this.Description = "";
-    this.ID = -1;
+export class ItemModel {
+  constructor(private item : Item) {
   }
 }

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {UniversalisService} from "../../services/universalis.service";
 import {ItemReturnValue, XIVApiService} from "../../services/xivapi.service";
-import {Item} from "../../models/item.model";
+import {Item} from "../../models/item.interface";
 import {Recipe} from "../../models/recipe.interface";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-recipe-search',
@@ -13,7 +14,7 @@ export class RecipeSearchComponent implements OnInit {
   searchedForName = "Bronze Ingot";
   recipes : Recipe[] = [];
 
-  constructor(private universalisService : UniversalisService, private xivApiService : XIVApiService) { }
+  constructor(private universalisService : UniversalisService, private xivApiService : XIVApiService, private router : Router) { }
 
   ngOnInit(): void {
   }
@@ -29,7 +30,7 @@ export class RecipeSearchComponent implements OnInit {
     }
   }
 
-  onRecipeSelect(recipe : Recipe) {
-    console.log(recipe);
+  async onRecipeSelect(recipe : Recipe) {
+    await this.router.navigate(["calculator"], { state: {recipe: recipe}});
   }
 }

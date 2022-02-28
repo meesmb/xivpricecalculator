@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ItemReturnValue} from "../../../services/xivapi.service";
-import {Item} from "../../../models/item.model";
+import {Item} from "../../../models/item.interface";
 import {Recipe} from "../../../models/recipe.interface";
 
 @Component({

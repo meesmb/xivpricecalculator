@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpService} from "./http.service";
 import {HttpClient} from "@angular/common/http";
-import {Item} from "../models/item.model";
+import {Item} from "../models/item.interface";
 import {Recipe} from "../models/recipe.interface";
 
 export interface ItemReturnValue {Url: string, ID: number, Icon: string, Name: string}
@@ -24,6 +24,20 @@ export class XIVApiService extends HttpService {
             resolve(result.Results);
         });
       });
+  }
+
+  // returns an empty array if there is no recipe
+  public async doesItemHaveRecipe(itemName : string) : Promise<Recipe[]> {
+    return new Promise<Recipe[]>(async (resolve, reject) => {
+      try {
+        let data = await this.getRecipeUrlsByName(itemName);
+        let recipes = await this.getItemsData(data);
+        resolve(recipes);
+      }
+      catch (e) {
+        resolve([]);
+      }
+    });
   }
 
   public async getItemsData(itemData : ItemReturnValue[]) : Promise<Recipe[]> {

@@ -7,18 +7,22 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RecipeSearchComponent } from './recipe-search/recipe-search.component';
 import { HeaderComponent } from './header/header.component';
 import { RecipeListItemComponent } from './recipe-search/recipe-list-item/recipe-list-item.component';
+import { CalculatorComponent } from './calculator/calculator/calculator.component';
+import {AppRouting} from "./app.routing";
 
 @NgModule({
   declarations: [
     AppComponent,
     RecipeSearchComponent,
     HeaderComponent,
-    RecipeListItemComponent
+    RecipeListItemComponent,
+    CalculatorComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    AppRouting,
   ],
   providers: [],
   bootstrap: [AppComponent]
