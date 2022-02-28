@@ -57,4 +57,18 @@ export class XIVApiService extends HttpService {
       });
     });
   }
+
+  public async getWorlds() : Promise<{name: string, selected: boolean}[]>{
+    return new Promise(async (resolve, reject) => {
+      try {
+        const data = await this._get<{Results: {Name: string, ID: number}[]}>("/World");
+        let result : {name: string, selected: boolean}[] = [];
+        data.Results.forEach((d) => result.push({name: d.Name, selected: false}));
+        resolve(result);
+      }
+      catch (e) {
+        reject(e);
+      }
+    });
+  }
 }

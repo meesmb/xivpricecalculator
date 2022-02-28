@@ -25,7 +25,8 @@ export class CalculatorComponent implements OnInit {
       const state = currentNavigation.extras.state;
       if (state) {
         this.recipe = new RecipeModel(state["recipe"]);
-        this.dataTransformService.transformToUsableData("Phoenix", this.recipe).then((t) => {
+        let selectedWorld = state["world"];
+        this.dataTransformService.transformToUsableData(selectedWorld, this.recipe).then((t) => {
           this.item = t;
           //this.recipeColumn.init(t);
           this.setIngredientColumnDepth(t);

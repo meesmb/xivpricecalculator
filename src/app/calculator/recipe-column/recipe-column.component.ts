@@ -7,7 +7,6 @@ import {TransformedItem} from "../../../models/transformed-item.model";
   styleUrls: ['./recipe-column.component.scss']
 })
 export class RecipeColumnComponent implements OnInit {
-  itemsToShow : TransformedItem[] = [];
   @Input() item! : {i: TransformedItem | null, c: number};
   @Input() shouldShowToggles : boolean = true;
   @Output() onCraftToggle = new EventEmitter<{i: TransformedItem | null, c: number}>();
