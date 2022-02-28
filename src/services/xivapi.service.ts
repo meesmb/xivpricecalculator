@@ -63,12 +63,20 @@ export class XIVApiService extends HttpService {
       try {
         const data = await this._get<{Results: {Name: string, ID: number}[]}>("/World");
         let result : {name: string, selected: boolean}[] = [];
-        data.Results.forEach((d) => result.push({name: d.Name, selected: false}));
+        data.Results.forEach((d) => {
+          if (this.isCorrectWorldName(d.Name))
+            result.push({name: d.Name, selected: false});
+        });
         resolve(result);
       }
       catch (e) {
         reject(e);
       }
     });
+  }
+
+  private isCorrectWorldName(name : string) : boolean {
+    return (!name.includes("-") && !name.includes("_") &&
+      name !== "crossworld" && name !== "reserved1");
   }
 }
