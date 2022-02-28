@@ -1,0 +1,8 @@
+<div *ngFor="let i of getIngredients()">
+  <app-item-price-card [item]="i" (onToggleCraft)="onCraftToggle.emit($event)"></app-item-price-card>
+</div>
+<div class="col" *ngIf="shouldShowCraftColumn" >
+    <div *ngFor="let i of itemsToShow">
+      <app-recipe-column [item]="i"></app-recipe-column>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row" *ngIf="item === null">
+    <app-loading ></app-loading>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <app-item-price-card [item]="item" id="recipe_column_0"></app-item-price-card>
+    </div>
+    <div class="col">
+      <app-recipe-column [item]="item" (onCraftToggle)="toggleItemFromIngedients(0, $event)"></app-recipe-column>
+    </div>
+    <div class="col" *ngFor="let column of ingredientColumns; let c = index">
+      <div *ngFor="let ingredient of column; let i = index">
+        <app-recipe-column [item]="ingredient" (onCraftToggle)="toggleItemFromIngedients(c, $event)"></app-recipe-column>
+      </div>
+    </div>
+  </div>
+</div>

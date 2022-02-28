@@ -1,0 +1,28 @@
+<div class="item-prices-container">
+  <div class="container item-container">
+    <div class="row"  *ngIf="item !== null">
+      <div class="col-1 recipe-icon-container">
+        <img src="{{getRecipeIconUrl()}}" alt="icon of the item" class="recipe-icon">
+      </div>
+      <div class="col">
+        <div class="item-name">
+          {{item.getResultItem().getName()}}
+        </div>
+        <div class="item-description">
+          {{item.getResultItem().getDescription()}}
+        </div>
+      </div>
+      <div class="col">
+        <div class="item-price">
+          {{getItemPrice()}}
+        </div>
+        <div class="craft-toggle" *ngIf="shouldShowCheckbox()">
+          <label class="checkbox-inline">
+            <input type="checkbox" data-toggle="toggle" (click)="onToggleCraft.emit(item)"> crafted
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

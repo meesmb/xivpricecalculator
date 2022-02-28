@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UniversalisService} from "../../services/universalis.service";
 import {ItemReturnValue, XIVApiService} from "../../services/xivapi.service";
-import {Item} from "../../models/item.interface";
 import {Recipe} from "../../models/recipe.interface";
 import {Router} from "@angular/router";
 
@@ -11,7 +10,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./recipe-search.component.scss']
 })
 export class RecipeSearchComponent implements OnInit {
-  searchedForName = "Bronze Ingot";
+  searchedForName = "The Greater Key of Tremors";
   recipes : Recipe[] = [];
 
   constructor(private universalisService : UniversalisService, private xivApiService : XIVApiService, private router : Router) { }

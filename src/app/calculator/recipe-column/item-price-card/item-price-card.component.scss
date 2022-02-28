@@ -1,0 +1,18 @@
+@import "src/styles";
+
+.item-prices-container {
+  margin-top: 20px;
+}
+.item-container {
+  background-color: $default-light-red;
+}
+.item-price {
+  color: $default-price-color;
+}
+.item-name {
+  font-weight: bold;
+}
+.recipe-icon-container {
+  height: 50px;
+  margin-top: 8px;
+}

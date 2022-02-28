@@ -20,12 +20,20 @@ export class TransformedItem {
     return this.amount;
   }
 
+  getResultItem() : ItemModel {
+    return this.resultItem;
+  }
+
   addIngredient(ingredient : TransformedItem) {
     this.ingredients.push(ingredient);
   }
 
+  getIngredients() : TransformedItem[] {
+    return this.ingredients;
+  }
+
   isCraftedItem() : boolean {
-    return this.ingredients.length === 0;
+    return this.ingredients.length !== 0;
   }
 
   setUseCraftedPrice(useCraftedPrice : boolean) {
