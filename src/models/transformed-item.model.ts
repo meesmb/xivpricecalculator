@@ -9,6 +9,7 @@ export class TransformedItem {
   private useCraftedPrice : boolean = false;
   private buyPrice : ItemPrice;
   private readonly amount : number;
+  private static USE_MIN_PRICE : boolean = true;
 
   constructor(result : Item, price : ItemPrice, amount : number) {
     this.amount = amount;
@@ -39,11 +40,21 @@ export class TransformedItem {
   setUseCraftedPrice(useCraftedPrice : boolean) {
     this.useCraftedPrice = useCraftedPrice;
   }
+  getUseCraftedPrice() : boolean {
+    return this.useCraftedPrice;
+  }
+
+  getSetPrice() : number {
+    if (TransformedItem.USE_MIN_PRICE) {
+      return this.getPrice_min();
+    }
+    return this.getPrice_average();
+  }
 
   getPrice_min() : number {
     if (this.isCraftedItem() && this.useCraftedPrice) {
       let total = 0;
-      this.ingredients.forEach((ingredient) => total += ingredient.getPrice_min());
+      this.ingredients.forEach((ingredient) => total += (ingredient.getPrice_min() * ingredient.getAmount()));
       return total;
     }
     else {
@@ -54,7 +65,7 @@ export class TransformedItem {
   getPrice_average() : number {
     if (this.isCraftedItem() && this.useCraftedPrice) {
       let total = 0;
-      this.ingredients.forEach((ingredient) => total += ingredient.getPrice_average());
+      this.ingredients.forEach((ingredient) => total += (ingredient.getPrice_average() * ingredient.getAmount()));
       return total;
     }
     else {

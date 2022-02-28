@@ -10,7 +10,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./recipe-search.component.scss']
 })
 export class RecipeSearchComponent implements OnInit {
-  searchedForName = "The Greater Key of Tremors";
+  searchedForName = "Crag";
   recipes : Recipe[] = [];
 
   constructor(private universalisService : UniversalisService, private xivApiService : XIVApiService, private router : Router) { }

@@ -1,0 +1,13 @@
+@import "src/styles";
+
+.item-prices-header {
+  border-bottom: 1px $default-red solid;
+}
+.item-price {
+  color: $default-price-color;
+}
+.icon {
+  height: 20px;
+  width: auto;
+  margin: 3px;
+}

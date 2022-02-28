@@ -12,7 +12,7 @@ import {colors} from "@angular/cli/utilities/color";
   styleUrls: ['./calculator.component.scss']
 })
 export class CalculatorComponent implements OnInit {
-  @ViewChild("recipe_column_0") recipeColumn : any;
+  @ViewChild("recipe_column_0") recipeCard : any;
 
   private readonly recipe! : RecipeModel;
   public item : TransformedItem | null = null;
@@ -27,8 +27,10 @@ export class CalculatorComponent implements OnInit {
         this.recipe = new RecipeModel(state["recipe"]);
         this.dataTransformService.transformToUsableData("Phoenix", this.recipe).then((t) => {
           this.item = t;
-          this.recipeColumn.init(t);
+          //this.recipeColumn.init(t);
+          this.setIngredientColumnDepth(t);
         }, (e) => {
+          console.log(e);
         }).catch((e) => console.log(e));
       }
     }
@@ -37,24 +39,60 @@ export class CalculatorComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  toggleItemFromIngedients(column: number, ingredient : TransformedItem) {
-    if (this.ingredientColumns.length <= column) {
-      this.ingredientColumns.push([]);
-    }
-    let col = this.ingredientColumns[column];
-    if (col.includes(ingredient)) {
+  getItemWithColAt(item : TransformedItem | null, col : number) {
+    return {i: item, c: col};
+  }
+
+  toggleItemFromIngredients(ingredient : {i: TransformedItem | null, c: number}) {
+    if (ingredient.i === null) return;
+    console.log(ingredient.c);
+    // toggle the use of crafted price
+    ingredient.i.setUseCraftedPrice(!ingredient.i.getUseCraftedPrice());
+    let col = this.ingredientColumns[ingredient.c];
+    if (col.includes(ingredient.i)) {
       col.forEach((val, index) => {
-        if (val == ingredient) {
+        if (val == ingredient.i) {
           col.splice(index, 1);
         }
       });
-      if (col.length === 0) {
-        this.ingredientColumns.splice(column, 1);
-      }
     }
     else {
-      col.push(ingredient);
+      col.push(ingredient.i);
     }
   }
 
+  getTotalProfit() : number {
+    if (this.item && this.recipeCard) {
+      return this.item.getSetPrice() - this.getCraftingPrice();
+    }
+    return 0;
+  }
+
+  private setIngredientColumnDepth(item : TransformedItem) {
+    const depth = this.getMaxIngredientColumnDepth(item);
+    for (let i = 0; i < depth; i++) {
+      this.ingredientColumns.push([]);
+    }
+  }
+
+  private getMaxIngredientColumnDepth(item : TransformedItem, lastDepth : number = 0) : number {
+   for (let i of item.getIngredients()) {
+     if (i.isCraftedItem()) {
+       lastDepth += 1;
+       lastDepth = this.getMaxIngredientColumnDepth(i, lastDepth);
+     }
+   }
+    return lastDepth;
+  }
+
+  private getCraftingPrice() : number {
+    if (this.item) {
+      let total = 0;
+      this.item.getIngredients().forEach((i) => {
+        total += (i.getSetPrice() * i.getAmount());
+      });
+      return total;
+    }
+    return 0;
+  }
 }

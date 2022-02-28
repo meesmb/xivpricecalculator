@@ -6,14 +6,24 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <app-item-price-card [item]="item" id="recipe_column_0"></app-item-price-card>
+      <div class="container" *ngIf="item !== null">
+        <div class="row">
+          <div class="col">
+            Profit:
+          </div>
+          <div class="col item-price">
+            {{getTotalProfit()}}
+          </div>
+        </div>
+      </div>
+      <app-item-price-card [item]="getItemWithColAt(item, 0)" #recipe_column_0 [shouldShowToggle]="false"></app-item-price-card>
     </div>
     <div class="col">
-      <app-recipe-column [item]="item" (onCraftToggle)="toggleItemFromIngedients(0, $event)"></app-recipe-column>
+      <app-recipe-column [item]="getItemWithColAt(item, 0)" (onCraftToggle)="toggleItemFromIngredients($event)"></app-recipe-column>
     </div>
     <div class="col" *ngFor="let column of ingredientColumns; let c = index">
       <div *ngFor="let ingredient of column; let i = index">
-        <app-recipe-column [item]="ingredient" (onCraftToggle)="toggleItemFromIngedients(c, $event)"></app-recipe-column>
+        <app-recipe-column [item]="getItemWithColAt(ingredient, c)" (onCraftToggle)="toggleItemFromIngredients($event)"></app-recipe-column>
       </div>
     </div>
   </div>

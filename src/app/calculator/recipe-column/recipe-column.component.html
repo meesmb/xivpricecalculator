@@ -1,8 +1,19 @@
-<div *ngFor="let i of getIngredients()">
-  <app-item-price-card [item]="i" (onToggleCraft)="onCraftToggle.emit($event)"></app-item-price-card>
-</div>
-<div class="col" *ngIf="shouldShowCraftColumn" >
-    <div *ngFor="let i of itemsToShow">
-      <app-recipe-column [item]="i"></app-recipe-column>
+<div class="item-prices-header" *ngIf="getIngredients().length !== 0">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <img src="{{getRecipeIconUrl()}}" alt="icon of the item" class="icon">
+      </div>
+      <div class="col">
+        Crafting Price:
+      </div>
+      <div class="col item-price">
+        {{getPrice()}}
+      </div>
     </div>
+  </div>
 </div>
+<div *ngFor="let i of getIngredients()">
+  <app-item-price-card [item]="getItemWithCol(i)" (onToggleCraft)="onCraftToggle.emit($event)" [shouldShowToggle]="shouldShowToggles"></app-item-price-card>
+</div>
+

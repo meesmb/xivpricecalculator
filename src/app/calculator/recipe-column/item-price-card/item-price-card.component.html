@@ -1,20 +1,27 @@
 <div class="item-prices-container">
   <div class="container item-container">
     <div class="row"  *ngIf="item !== null">
-      <div class="col-1 recipe-icon-container">
+      <div class="col-2 recipe-icon-container">
         <img src="{{getRecipeIconUrl()}}" alt="icon of the item" class="recipe-icon">
       </div>
-      <div class="col">
+      <div class="col-7">
         <div class="item-name">
-          {{item.getResultItem().getName()}}
+          {{item.i?.getResultItem()?.getName()}}
         </div>
         <div class="item-description">
-          {{item.getResultItem().getDescription()}}
+          {{item.i?.getResultItem()?.getDescription()}}
         </div>
       </div>
-      <div class="col">
+      <div class="col-3">
+        <div class="item-amount">
+          {{getItemAmount()}} *
+        </div>
         <div class="item-price">
           {{getItemPrice()}}
+        </div>
+        Total:
+        <div class="total-price item-price">
+          {{getTotalItemPrice()}}
         </div>
         <div class="craft-toggle" *ngIf="shouldShowCheckbox()">
           <label class="checkbox-inline">

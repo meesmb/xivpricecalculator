@@ -7,8 +7,9 @@ import {TransformedItem} from "../../../../models/transformed-item.model";
   styleUrls: ['./item-price-card.component.scss']
 })
 export class ItemPriceCardComponent implements OnInit {
-  @Input() item : TransformedItem | null = null;
-  @Output() onToggleCraft = new EventEmitter<TransformedItem>();
+  @Input() item! : {i: TransformedItem | null, c: number};
+  @Input() shouldShowToggle : boolean = true;
+  @Output() onToggleCraft = new EventEmitter<{i: TransformedItem | null, c: number}>();
 
   constructor() { }
 
@@ -16,16 +17,27 @@ export class ItemPriceCardComponent implements OnInit {
   }
 
   getItemPrice() : number {
-    if (this.item !== null)
-      return this.item.getPrice_min();
+    if (this.item.i !== null)
+      return this.item.i.getSetPrice();
     return 0;
   }
 
+  getItemAmount() : number {
+    if (this.item.i !== null) {
+      return this.item.i.getAmount();
+    }
+    return 0;
+  }
+
+  getTotalItemPrice() : number {
+    return this.getItemAmount() * this.getItemPrice();
+  }
+
   shouldShowCheckbox() : boolean {
-    if (this.item === null) return false;
-    return this.item.isCraftedItem()
+    if (this.item.i === null || !this.shouldShowToggle) return false;
+    return this.item.i.isCraftedItem()
   }
   getRecipeIconUrl() : string {
-    return "https://xivapi.com" + this.item?.getResultItem().getIcon();
+    return "https://xivapi.com" + this.item.i?.getResultItem().getIcon();
   }
 }
