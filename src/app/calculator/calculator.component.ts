@@ -17,6 +17,7 @@ export class CalculatorComponent implements OnInit {
   private readonly recipe! : RecipeModel;
   public item : TransformedItem | null = null;
   public ingredientColumns : TransformedItem[][] = [];
+  public ingredientColumnsBackup : TransformedItem[][] = [];
 
   constructor(private router : Router, private dataTransformService : DataTransformService) {
     const currentNavigation = this.router.getCurrentNavigation();
@@ -28,8 +29,7 @@ export class CalculatorComponent implements OnInit {
         let selectedWorld = state["world"];
         this.dataTransformService.transformToUsableData(selectedWorld, this.recipe).then((t) => {
           this.item = t;
-          //this.recipeColumn.init(t);
-          this.setIngredientColumnDepth(t);
+          this.createIngredientColumns();
         }, (e) => {
           console.log(e);
         }).catch((e) => console.log(e));
@@ -44,15 +44,25 @@ export class CalculatorComponent implements OnInit {
     return {i: item, c: col};
   }
 
+  createIngredientColumns() {
+    if (this.item === null) return;
+    this.setIngredientColumnDepth(this.item);
+  }
+
   toggleItemFromIngredients(ingredient : {i: TransformedItem | null, c: number}) {
     if (ingredient.i === null) return;
+    // console.log("c: ", ingredient.c, " l: ", this.ingredientColumns.length);
+
     // toggle the use of crafted price
     ingredient.i.setUseCraftedPrice(!ingredient.i.getUseCraftedPrice());
+
     let col = this.ingredientColumns[ingredient.c];
     if (col.includes(ingredient.i)) {
-      col.forEach((val, index) => {
+      // console.log(col.includes(ingredient.i), "removing from: ", ingredient.c);
+      let colToRemoveFrom = this.ingredientColumns[ingredient.c];
+      colToRemoveFrom.forEach((val, index) => {
         if (val == ingredient.i) {
-          col.splice(index, 1);
+          colToRemoveFrom.splice(index, 1);
         }
       });
     }
@@ -72,6 +82,7 @@ export class CalculatorComponent implements OnInit {
     const depth = this.getMaxIngredientColumnDepth(item);
     for (let i = 0; i < depth; i++) {
       this.ingredientColumns.push([]);
+      this.ingredientColumnsBackup.push([]);
     }
   }
 

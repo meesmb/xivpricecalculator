@@ -16,14 +16,14 @@
           </div>
         </div>
       </div>
-      <app-item-price-card [item]="getItemWithColAt(item, 0)" #recipe_column_0 [shouldShowToggle]="false"></app-item-price-card>
+      <app-item-price-card [item]="getItemWithColAt(item, -1)" #recipe_column_0 [shouldShowToggle]="false"></app-item-price-card>
     </div>
     <div class="col">
       <app-recipe-column [item]="getItemWithColAt(item, 0)" (onCraftToggle)="toggleItemFromIngredients($event)"></app-recipe-column>
     </div>
-    <div class="col" *ngFor="let column of ingredientColumns; let c = index">
-      <div *ngFor="let ingredient of column; let i = index">
-        <app-recipe-column [item]="getItemWithColAt(ingredient, c)" (onCraftToggle)="toggleItemFromIngredients($event)"></app-recipe-column>
+    <div class="col" *ngFor="let column of ingredientColumns; let c = index;">
+      <div *ngFor="let ingredient of column; let i = index;">
+        <app-recipe-column [item]="getItemWithColAt(ingredient, 1 + c)" (onCraftToggle)="toggleItemFromIngredients($event)"></app-recipe-column>
       </div>
     </div>
   </div>

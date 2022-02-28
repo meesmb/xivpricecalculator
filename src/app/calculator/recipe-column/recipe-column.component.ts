@@ -18,11 +18,11 @@ export class RecipeColumnComponent implements OnInit {
   }
 
   init(item : TransformedItem) : void {
-    item.getIngredients().forEach((i) => {
-      if (i.isCraftedItem()) {
-        this.item.c++;
-      }
-    });
+    // item.getIngredients().forEach((i) => {
+    //   if (i.isCraftedItem()) {
+    //     this.item.c++;
+    //   }
+    // });
   }
 
   getIngredients() : TransformedItem[] {
@@ -46,7 +46,7 @@ export class RecipeColumnComponent implements OnInit {
   }
 
   getItemWithCol(item : TransformedItem | null) {
-    let col = (this.item) ? this.item.c : 0;
+    let col = this.item.c;
     return {i: item, c: col};
   }
 }

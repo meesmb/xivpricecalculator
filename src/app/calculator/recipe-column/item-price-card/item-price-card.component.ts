@@ -40,4 +40,8 @@ export class ItemPriceCardComponent implements OnInit {
   getRecipeIconUrl() : string {
     return "https://xivapi.com" + this.item.i?.getResultItem().getIcon();
   }
+
+  toggle() {
+    this.onToggleCraft.emit(this.item);
+  }
 }

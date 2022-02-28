@@ -13,7 +13,7 @@ export class RecipeSearchComponent implements OnInit {
   searchedForName = "Crag";
   recipes : Recipe[] = [];
   worlds : {name: string, selected: boolean}[] = [];
-  selectedWorld : string = "";
+  selectedWorld : string = "Phoenix";
 
   constructor(private universalisService : UniversalisService, private xivApiService : XIVApiService, private router : Router) { }
 
