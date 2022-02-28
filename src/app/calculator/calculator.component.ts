@@ -45,7 +45,6 @@ export class CalculatorComponent implements OnInit {
 
   toggleItemFromIngredients(ingredient : {i: TransformedItem | null, c: number}) {
     if (ingredient.i === null) return;
-    console.log(ingredient.c);
     // toggle the use of crafted price
     ingredient.i.setUseCraftedPrice(!ingredient.i.getUseCraftedPrice());
     let col = this.ingredientColumns[ingredient.c];
@@ -76,10 +75,11 @@ export class CalculatorComponent implements OnInit {
   }
 
   private getMaxIngredientColumnDepth(item : TransformedItem, lastDepth : number = 0) : number {
+    let found = false;
    for (let i of item.getIngredients()) {
-     if (i.isCraftedItem()) {
-       lastDepth += 1;
-       lastDepth = this.getMaxIngredientColumnDepth(i, lastDepth);
+     if (i.isCraftedItem() && !found) {
+       found = true;
+       lastDepth = this.getMaxIngredientColumnDepth(i, lastDepth) + 1;
      }
    }
     return lastDepth;
