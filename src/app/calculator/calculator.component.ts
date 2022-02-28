@@ -3,8 +3,6 @@ import {Router} from "@angular/router";
 import {RecipeModel} from "../../models/recipe.model";
 import {DataTransformService} from "../../services/data-transform.service";
 import {TransformedItem} from "../../models/transformed-item.model";
-import {RecipeColumnComponent} from "./recipe-column/recipe-column.component";
-import {colors} from "@angular/cli/utilities/color";
 
 @Component({
   selector: 'app-calculator',

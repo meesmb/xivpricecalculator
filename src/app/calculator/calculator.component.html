@@ -16,7 +16,7 @@
           </div>
         </div>
       </div>
-      <app-item-price-card [item]="getItemWithColAt(item, -1)" #recipe_column_0 [shouldShowToggle]="false"></app-item-price-card>
+      <app-item-price-card *ngIf="item !== null" [item]="getItemWithColAt(item, -1)" #recipe_column_0 [shouldShowToggle]="false"></app-item-price-card>
     </div>
     <div class="col">
       <app-recipe-column [item]="getItemWithColAt(item, 0)" (onCraftToggle)="toggleItemFromIngredients($event)"></app-recipe-column>
