@@ -51,24 +51,31 @@ export class CalculatorComponent implements OnInit {
 
   toggleItemFromIngredients(ingredient : {i: TransformedItem | null, c: number}) {
     if (ingredient.i === null) return;
-    // console.log("c: ", ingredient.c, " l: ", this.ingredientColumns.length);
-
     // toggle the use of crafted price
     ingredient.i.setUseCraftedPrice(!ingredient.i.getUseCraftedPrice());
-
     let col = this.ingredientColumns[ingredient.c];
     if (col.includes(ingredient.i)) {
-      // console.log(col.includes(ingredient.i), "removing from: ", ingredient.c);
-      let colToRemoveFrom = this.ingredientColumns[ingredient.c];
-      colToRemoveFrom.forEach((val, index) => {
-        if (val == ingredient.i) {
-          colToRemoveFrom.splice(index, 1);
-        }
-      });
+      this.removeIngredientFromColumns(ingredient);
     }
     else {
       col.push(ingredient.i);
     }
+  }
+
+  private removeIngredientFromColumns(ingredient : {i: TransformedItem | null, c: number}) {
+    this.removeIngredientFromColumn(ingredient.i, ingredient.c);
+    if (!ingredient.i) return;
+    for (let ingr of ingredient.i.getIngredients()) {
+      this.removeIngredientFromColumns({i: ingr, c: ingredient.c + 1});
+    }
+  }
+  private removeIngredientFromColumn(i : TransformedItem | null, column : number) {
+    let colToRemoveFrom = this.ingredientColumns[column];
+    colToRemoveFrom.forEach((val, index) => {
+      if (val == i) {
+        colToRemoveFrom.splice(index, 1);
+      }
+    });
   }
 
   getTotalProfit() : number {
