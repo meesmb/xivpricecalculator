@@ -10,7 +10,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./recipe-search.component.scss']
 })
 export class RecipeSearchComponent implements OnInit {
-  searchedForName = "Crag";
+  searchedForName = "Wooden Loft";
   recipes : Recipe[] = [];
   worlds : {name: string, selected: boolean}[] = [];
   selectedWorld : string = "Phoenix";

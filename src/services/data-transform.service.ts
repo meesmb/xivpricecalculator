@@ -23,10 +23,8 @@ export class DataTransformService {
     let result : TransformedItem[] = [];
     let ingredients : {ingredient: Item, amount: number}[] = recipe.getIngredients();
     for (let ingredient of ingredients) {
-      if (ingredient.ingredient.Name !== recipe.getName()) {
-        let item = await this.getTransformedItem(world, ingredient);
-        result.push(item);
-      }
+      let item = await this.getTransformedItem(world, ingredient);
+      result.push(item);
     }
     return result;
   }

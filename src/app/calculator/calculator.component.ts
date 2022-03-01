@@ -15,7 +15,7 @@ export class CalculatorComponent implements OnInit {
   private recipe! : RecipeModel;
   public item : TransformedItem | null = null;
   public ingredientColumns : TransformedItem[][] = [];
-  public ingredientColumnsBackup : TransformedItem[][] = [];
+  public totalProfit = 0;
 
   constructor(private router : Router, private dataTransformService : DataTransformService) {
     const currentNavigation = this.router.getCurrentNavigation();
@@ -35,8 +35,7 @@ export class CalculatorComponent implements OnInit {
     }
   }
   ngOnInit(): void {
-    console.log("called")
-
+    this.totalProfit = this.getTotalProfit();
   }
 
   getItemWithColAt(item : TransformedItem | null, col : number) {
@@ -70,6 +69,7 @@ export class CalculatorComponent implements OnInit {
   }
   private removeIngredientFromColumn(i : TransformedItem | null, column : number) {
     let colToRemoveFrom = this.ingredientColumns[column];
+    if (!colToRemoveFrom) return;
     colToRemoveFrom.forEach((val, index) => {
       if (val == i) {
         colToRemoveFrom.splice(index, 1);
@@ -77,7 +77,7 @@ export class CalculatorComponent implements OnInit {
     });
   }
 
-  getTotalProfit() : number {
+  private getTotalProfit() : number {
     if (this.item && this.recipeCard) {
       return this.item.getSetPrice() - this.getCraftingPrice();
     }
@@ -85,22 +85,27 @@ export class CalculatorComponent implements OnInit {
   }
 
   private setIngredientColumnDepth(item : TransformedItem) {
-    const depth = this.getMaxIngredientColumnDepth(item);
+    const depth = this.getMaxIngredientColumnDepth(item) - 1;
     for (let i = 0; i < depth; i++) {
       this.ingredientColumns.push([]);
-      this.ingredientColumnsBackup.push([]);
     }
   }
 
-  private getMaxIngredientColumnDepth(item : TransformedItem, lastDepth : number = 0) : number {
-    let found = false;
-   for (let i of item.getIngredients()) {
-     if (i.isCraftedItem() && !found) {
-       found = true;
-       lastDepth = this.getMaxIngredientColumnDepth(i, lastDepth) + 1;
-     }
-   }
-    return lastDepth;
+  private getMaxIngredientColumnDepth(item : TransformedItem) : number {
+    if (!item.isCraftedItem()) return 0;
+    else {
+      let maxDepth = 0;
+      for (let it of item.getIngredients()) {
+        maxDepth = Math.max(maxDepth, this.getMaxIngredientColumnDepth(it));
+      }
+      return maxDepth + 1;
+    }
+    // for (let i of item.getIngredients()) {
+    //  if (i.isCraftedItem()) {
+    //    let newDepth = this.getMaxIngredientColumnDepth(i, lastDepth) + 1;
+    //    if (newDepth > lastDepth)
+    //      lastDepth = newDepth;
+    //  }
   }
 
   private getCraftingPrice() : number {
