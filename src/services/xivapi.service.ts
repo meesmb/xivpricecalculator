@@ -26,11 +26,23 @@ export class XIVApiService extends HttpService {
       });
   }
 
+  public async getRecipeUrlsByNameStrict(recipeName : string) : Promise<ItemReturnValue[]> {
+    let urlwithparams = "/search?string_algo=query_string&indexes=Recipe&limit="
+      + this.getRecipeAmountLimit
+      + "&string=" + recipeName;
+    return new Promise<ItemReturnValue[]>((resolve, reject) =>{
+      this._get<{Results: ItemReturnValue[]}>(urlwithparams)
+        .then((result) => {
+          resolve(result.Results);
+        });
+    });
+  }
+
   // returns an empty array if there is no recipe
   public async doesItemHaveRecipe(itemName : string) : Promise<Recipe[]> {
     return new Promise<Recipe[]>(async (resolve, reject) => {
       try {
-        let data = await this.getRecipeUrlsByName(itemName);
+        let data = await this.getRecipeUrlsByNameStrict(itemName);
         let recipes = await this.getItemsData(data);
         resolve(recipes);
       }

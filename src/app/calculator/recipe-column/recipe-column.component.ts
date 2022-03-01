@@ -13,17 +13,8 @@ export class RecipeColumnComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    if (this.item.i)
-      this.init(this.item.i);
   }
 
-  init(item : TransformedItem) : void {
-    // item.getIngredients().forEach((i) => {
-    //   if (i.isCraftedItem()) {
-    //     this.item.c++;
-    //   }
-    // });
-  }
 
   getIngredients() : TransformedItem[] {
     if (this.item.i) return this.item.i.getIngredients();

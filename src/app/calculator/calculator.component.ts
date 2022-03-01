@@ -12,7 +12,7 @@ import {TransformedItem} from "../../models/transformed-item.model";
 export class CalculatorComponent implements OnInit {
   @ViewChild("recipe_column_0") recipeCard : any;
 
-  private readonly recipe! : RecipeModel;
+  private recipe! : RecipeModel;
   public item : TransformedItem | null = null;
   public ingredientColumns : TransformedItem[][] = [];
   public ingredientColumnsBackup : TransformedItem[][] = [];
@@ -34,8 +34,9 @@ export class CalculatorComponent implements OnInit {
       }
     }
   }
-
   ngOnInit(): void {
+    console.log("called")
+
   }
 
   getItemWithColAt(item : TransformedItem | null, col : number) {
