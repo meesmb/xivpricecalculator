@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {TransformedItem} from "../../../../models/transformed-item.model";
+import {ClipboardService} from "ngx-clipboard";
 
 @Component({
   selector: 'app-item-price-card',
@@ -11,9 +12,18 @@ export class ItemPriceCardComponent implements OnInit {
   @Input() shouldShowToggle : boolean = true;
   @Output() onToggleCraft = new EventEmitter<{i: TransformedItem | null, c: number}>();
 
-  constructor() { }
+  constructor(private clipBoardService : ClipboardService) { }
 
   ngOnInit(): void {
+  }
+
+  getResultItemName() : string {
+    if (this.item.i) return this.item.i.getResultItem().getName();
+    return "";
+  }
+
+  copyToClipBoard(value : string) {
+    this.clipBoardService.copy(value);
   }
 
   getItemPrice() : number {
@@ -32,6 +42,7 @@ export class ItemPriceCardComponent implements OnInit {
   getTotalItemPrice() : number {
     return this.getItemAmount() * this.getItemPrice();
   }
+
 
   shouldShowCheckbox() : boolean {
     if (this.item.i === null || !this.shouldShowToggle) return false;

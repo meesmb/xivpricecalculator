@@ -2,8 +2,15 @@
 
 .header-container {
   background-color: $default-red;
+
 }
 .header-image {
   width: auto;
-  height: 80px;
+  height: 75px;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 10px;
+  &:hover {
+    background-color: $default-brown;
+  }
 }

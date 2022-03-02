@@ -12,6 +12,7 @@ import {AppRouting} from "./app.routing";
 import { ItemPriceCardComponent } from './calculator/recipe-column/item-price-card/item-price-card.component';
 import { LoadingComponent } from './calculator/recipe-column/item-price-card/loading/loading.component';
 import { RecipeColumnComponent } from './calculator/recipe-column/recipe-column.component';
+import {ClipboardModule} from "ngx-clipboard";
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { RecipeColumnComponent } from './calculator/recipe-column/recipe-column.
     HttpClientModule,
     NgbModule,
     AppRouting,
+    ClipboardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

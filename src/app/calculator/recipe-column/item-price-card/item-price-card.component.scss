@@ -5,17 +5,22 @@
 }
 .item-container {
   background-color: $default-light-red;
+  border-radius: 5px;
 }
 .item-price {
   color: $default-price-color;
 }
 .item-amount {
-  font-size: 12px;
+  font-size: 11px;
 }
 .item-name {
   font-weight: bold;
+  cursor: pointer;
 }
 .recipe-icon-container {
   height: 50px;
   margin-top: 8px;
+}
+.item-description {
+  font-size: 14px;
 }

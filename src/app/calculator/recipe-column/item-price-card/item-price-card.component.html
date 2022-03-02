@@ -5,8 +5,8 @@
         <img src="{{getRecipeIconUrl()}}" alt="icon of the item" class="recipe-icon">
       </div>
       <div class="col-7">
-        <div class="item-name">
-          {{item.i?.getResultItem()?.getName()}}
+        <div class="item-name" (click)="copyToClipBoard(getResultItemName())" ngbTooltip="Copy">
+          {{getResultItemName()}}
         </div>
         <div class="item-description">
           {{item.i?.getResultItem()?.getDescription()}}

@@ -8,7 +8,7 @@
     </div>
     <div class="col">
       <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="Recipe Name" aria-label="Recipe Name" aria-describedby="basic-addon2" (keyup)="setSearch($event)">
+        <input type="text" class="form-control" (keyup.enter)="search()" placeholder="Recipe Name" aria-label="Recipe Name" aria-describedby="basic-addon2" (keyup)="setSearch($event)">
         <div class="input-group-append">
           <button class="btn btn-outline-secondary search-button" type="button" (click)="search()">Search</button>
         </div>

@@ -28,6 +28,7 @@ export class CalculatorComponent implements OnInit {
         this.dataTransformService.transformToUsableData(selectedWorld, this.recipe).then((t) => {
           this.item = t;
           this.createIngredientColumns();
+          this.totalProfit = this.getTotalProfit();
         }, (e) => {
           console.log(e);
         }).catch((e) => console.log(e));
@@ -58,6 +59,7 @@ export class CalculatorComponent implements OnInit {
     else {
       col.push(ingredient.i);
     }
+    this.totalProfit = this.getTotalProfit();
   }
 
   private removeIngredientFromColumns(ingredient : {i: TransformedItem | null, c: number}) {
@@ -78,7 +80,7 @@ export class CalculatorComponent implements OnInit {
   }
 
   private getTotalProfit() : number {
-    if (this.item && this.recipeCard) {
+    if (this.item) {
       return this.item.getSetPrice() - this.getCraftingPrice();
     }
     return 0;
@@ -100,12 +102,6 @@ export class CalculatorComponent implements OnInit {
       }
       return maxDepth + 1;
     }
-    // for (let i of item.getIngredients()) {
-    //  if (i.isCraftedItem()) {
-    //    let newDepth = this.getMaxIngredientColumnDepth(i, lastDepth) + 1;
-    //    if (newDepth > lastDepth)
-    //      lastDepth = newDepth;
-    //  }
   }
 
   private getCraftingPrice() : number {
