@@ -3,6 +3,7 @@ import {UniversalisService} from "../../services/universalis.service";
 import {XIVApiService} from "../../services/xivapi.service";
 import {Recipe} from "../../models/recipe.interface";
 import {Router} from "@angular/router";
+import {CookieService} from "ngx-cookie-service";
 
 @Component({
   selector: 'app-recipe-search',
@@ -15,10 +16,13 @@ export class RecipeSearchComponent implements OnInit {
   worlds : {name: string, selected: boolean}[] = [];
   selectedWorld : string = "Phoenix";
 
-  constructor(private universalisService : UniversalisService, private xivApiService : XIVApiService, private router : Router) { }
+  constructor(private universalisService : UniversalisService, private xivApiService : XIVApiService, private router : Router, private cookieService : CookieService) { }
 
   async ngOnInit() {
     this.worlds = await this.xivApiService.getWorlds();
+    let world = this.cookieService.get("world");
+    if (world)
+      this.selectWorld({name: world, selected: true});
   }
 
   setSearch(event : any) {
@@ -37,6 +41,7 @@ export class RecipeSearchComponent implements OnInit {
   }
 
   selectWorld(world : {name: string, selected: boolean}) {
+    this.cookieService.set("world", world.name);
     this.selectedWorld = world.name;
     for (let w of this.worlds) {
       w.selected = w.name === world.name;

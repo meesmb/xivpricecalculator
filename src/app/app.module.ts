@@ -13,6 +13,8 @@ import { ItemPriceCardComponent } from './calculator/recipe-column/item-price-ca
 import { LoadingComponent } from './calculator/recipe-column/item-price-card/loading/loading.component';
 import { RecipeColumnComponent } from './calculator/recipe-column/recipe-column.component';
 import {ClipboardModule} from "ngx-clipboard";
+import {CookieService} from "ngx-cookie-service";
+import { PriceTypeSelectComponent } from './calculator/price-type-select/price-type-select.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import {ClipboardModule} from "ngx-clipboard";
     CalculatorComponent,
     ItemPriceCardComponent,
     LoadingComponent,
-    RecipeColumnComponent
+    RecipeColumnComponent,
+    PriceTypeSelectComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +35,7 @@ import {ClipboardModule} from "ngx-clipboard";
     AppRouting,
     ClipboardModule
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

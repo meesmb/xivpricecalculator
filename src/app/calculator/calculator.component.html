@@ -8,6 +8,12 @@
     <div class="col">
       <div class="container" *ngIf="item !== null">
         <div class="row">
+          <div class="price-type-select">
+            <app-price-type-select (onTypeSelect)="onPriceTypeSelect($event)"></app-price-type-select>
+          </div>
+          <div class="selected-world">
+            showing data for: {{selectedWorld}}
+          </div>
           <div class="col">
             Profit:
           </div>

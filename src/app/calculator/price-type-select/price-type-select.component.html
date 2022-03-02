@@ -1,0 +1,6 @@
+Price type:
+<select class="form-select" aria-label="select price type">
+  <option *ngFor="let option of options" [selected]="option.selected" (click)="selectOption(option)">
+    {{option.type}}
+  </option>
+</select>
