@@ -7,3 +7,10 @@
 .search-button:hover {
   background-color: $default-black;
 }
+.a-no-new-line {
+  white-space: pre-line;
+}
+.site-explanation {
+  padding: 10px;
+  margin-bottom: 10px;
+}

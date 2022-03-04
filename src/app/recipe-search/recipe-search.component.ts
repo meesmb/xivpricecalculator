@@ -11,7 +11,7 @@ import {CookieService} from "ngx-cookie-service";
   styleUrls: ['./recipe-search.component.scss']
 })
 export class RecipeSearchComponent implements OnInit {
-  searchedForName = "Wooden Loft";
+  searchedForName = "";
   recipes : Recipe[] = [];
   worlds : {name: string, selected: boolean}[] = [];
   selectedWorld : string = "Phoenix";
@@ -23,6 +23,10 @@ export class RecipeSearchComponent implements OnInit {
     let world = this.cookieService.get("world");
     if (world)
       this.selectWorld({name: world, selected: true});
+    let item = this.cookieService.get("last-searched-item");
+    if (item) {
+      this.searchedForName = item;
+    }
   }
 
   setSearch(event : any) {
@@ -31,6 +35,7 @@ export class RecipeSearchComponent implements OnInit {
 
   async search() {
     if (this.searchedForName !== "") {
+      this.cookieService.set("last-searched-item", this.searchedForName);
       const data = await this.xivApiService.getRecipeUrlsByName(this.searchedForName);
       this.recipes = await this.xivApiService.getItemsData(data);
     }

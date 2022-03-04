@@ -74,6 +74,7 @@ export class XIVApiService extends HttpService {
     return new Promise(async (resolve, reject) => {
       try {
         const data = await this._get<{Results: {Name: string, ID: number}[]}>("/World");
+        console.log(data);
         let result : {name: string, selected: boolean}[] = [];
         data.Results.forEach((d) => {
           if (this.isCorrectWorldName(d.Name))
@@ -86,9 +87,17 @@ export class XIVApiService extends HttpService {
       }
     });
   }
-
+  private nonPublicServerNames = [
+    "crossworld",
+    "reserved1",
+    "konconv",
+    "Chaos",
+    "Hecatoncheir",
+    "Moomba",
+    "Syldra"
+  ]
   private isCorrectWorldName(name : string) : boolean {
     return (!name.includes("-") && !name.includes("_") &&
-      name !== "crossworld" && name !== "reserved1");
+      !this.nonPublicServerNames.includes(name));
   }
 }
