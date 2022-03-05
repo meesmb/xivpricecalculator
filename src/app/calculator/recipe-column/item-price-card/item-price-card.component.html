@@ -8,8 +8,21 @@
         <div class="item-name" (click)="copyToClipBoard(getResultItemName())" ngbTooltip="Copy">
           {{getResultItemName()}}
         </div>
-        <div class="item-description">
-          {{item.i?.getResultItem()?.getDescription()}}
+        <div class="links">
+          <div class="container link-container">
+            <div class="row">
+              <div class="col-2" *ngIf="getIsCraftedItem()">
+                <a href="{{getTeamCraftLink()}}" target="_blank" ngbTooltip="Open on Teamcraft">
+                  <img src="assets/teamcraft.png" alt="teamcraft logo" class="link-icon">
+                </a>
+              </div>
+              <div class="col-2">
+                <a href="{{getUniversalisLink()}}" target="_blank" ngbTooltip="Open on Universalis">
+                  <img src="assets/universalis.png" alt="universalis logo" class="link-icon">
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="col-3">
