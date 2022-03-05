@@ -15,10 +15,12 @@ export class RecipeSearchComponent implements OnInit {
   recipes : Recipe[] = [];
   worlds : {name: string, selected: boolean}[] = [];
   selectedWorld : string = "Phoenix";
+  hasSearched = false;
 
   constructor(private universalisService : UniversalisService, private xivApiService : XIVApiService, private router : Router, private cookieService : CookieService) { }
 
   async ngOnInit() {
+    this.hasSearched = false;
     this.worlds = await this.xivApiService.getWorlds();
     let world = this.cookieService.get("world");
     if (world)
@@ -34,6 +36,7 @@ export class RecipeSearchComponent implements OnInit {
   }
 
   async search() {
+    this.hasSearched = true;
     if (this.searchedForName !== "") {
       this.cookieService.set("last-searched-item", this.searchedForName);
       const data = await this.xivApiService.getRecipeUrlsByName(this.searchedForName);
