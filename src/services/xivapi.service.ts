@@ -79,7 +79,7 @@ export class XIVApiService extends HttpService {
           if (this.isCorrectWorldName(d.Name))
             result.push({name: d.Name, selected: false});
         });
-        resolve(result);
+        resolve(this.sortWorldNames(result));
       }
       catch (e) {
         reject(e);
@@ -98,5 +98,14 @@ export class XIVApiService extends HttpService {
   private isCorrectWorldName(name : string) : boolean {
     return (!name.includes("-") && !name.includes("_") &&
       !this.nonPublicServerNames.includes(name));
+  }
+
+  private sortWorldNames(worlds : {name: string, selected: boolean}[]) : {name: string, selected: boolean}[] {
+    return worlds.sort((w1, w2) => {
+      if (w1.name < w2.name) return -1;
+      if (w1.name > w2.name) return 1;
+      return 0;
+    });
+
   }
 }
