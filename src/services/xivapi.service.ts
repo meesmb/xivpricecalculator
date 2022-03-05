@@ -9,7 +9,7 @@ export interface ItemReturnValue {Url: string, ID: number, Icon: string, Name: s
   providedIn: 'root'
 })
 export class XIVApiService extends HttpService {
-  private getRecipeAmountLimit = "15";
+  private getRecipeAmountLimit = "40";
   constructor(http : HttpClient) {
     super(http, "https://xivapi.com");
   }
@@ -27,7 +27,7 @@ export class XIVApiService extends HttpService {
   }
 
   public async getRecipeUrlsByNameStrict(recipeName : string) : Promise<ItemReturnValue[]> {
-    let urlwithparams = "/search?string_algo=query_string&indexes=Recipe&limit="
+    let urlwithparams = "/search?string_algo=match&indexes=Recipe&limit="
       + this.getRecipeAmountLimit
       + "&string=" + recipeName;
     return new Promise<ItemReturnValue[]>((resolve, reject) =>{

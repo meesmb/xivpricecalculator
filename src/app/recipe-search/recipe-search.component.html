@@ -30,8 +30,11 @@
     <div *ngIf="recipes.length === 0 && hasSearched" class="text-danger">
       Could not find recipe
     </div>
-    <div class="recipes-container" *ngFor="let recipe of recipes">
-      <app-recipe-list-item [recipe]="recipe" (onClick)="onRecipeSelect($event)"></app-recipe-list-item>
+    <div [ngClass]="{'recipes-container': recipes.length >= 11}">
+      <div *ngFor="let recipe of recipes">
+        <app-recipe-list-item [recipe]="recipe" (onClick)="onRecipeSelect($event)"></app-recipe-list-item>
+      </div>
     </div>
+
   </div>
 </div>

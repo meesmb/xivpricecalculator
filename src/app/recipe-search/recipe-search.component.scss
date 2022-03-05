@@ -14,3 +14,9 @@
   padding: 10px;
   margin-bottom: 10px;
 }
+.recipes-container {
+  height: 600px;
+  width: 100%;
+  overflow: hidden;
+  overflow-y: scroll;
+}
