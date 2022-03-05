@@ -36,12 +36,12 @@ export class RecipeSearchComponent implements OnInit {
   }
 
   async search() {
-    this.hasSearched = true;
     if (this.searchedForName !== "") {
       this.cookieService.set("last-searched-item", this.searchedForName);
       const data = await this.xivApiService.getRecipeUrlsByName(this.searchedForName);
       this.recipes = await this.xivApiService.getItemsData(data);
     }
+    this.hasSearched = true;
   }
 
   async onRecipeSelect(recipe : Recipe) {
