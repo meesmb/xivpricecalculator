@@ -1,4 +1,8 @@
 # Xivpricecalculator
+this project allows for the calculating of potential crafting costs for items in the MMO Final Fantasy 14 using the [Universalis](https://universalis.app/) and [xivapi](https://xivapi.com/) REST APIs.
+hosted at: https://www.xivpricecalculator.com
+
+# How to deploy
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.0.1.
 
